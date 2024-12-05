@@ -3,6 +3,7 @@ import pygame
 
 class Client:
     def __init__(self, port_number=29998, server_address="localhost", server_port=29999):
+        # address and port of localhost server
         self.port_number = port_number
         self.server_address = server_address
         self.server_port = server_port
