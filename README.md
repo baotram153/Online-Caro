@@ -1,1 +1,14 @@
-# Online-Caro
+- Notes
+    - Every machines have to listen to the same port
+    - Imagine having 3 machines
+        - Once a host turn on the game, it will listen to port 29999, and send request to other hosts on this port
+            - If a connection is formed
+                - It will recieved the name of the player -> put into player list
+            - If a connection is not formed
+                - That host is not a player
+    - Simple version
+        - 1 machine as server and the other as client
+
+- Initial server
+    - 
+- Initial client
