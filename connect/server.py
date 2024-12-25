@@ -12,7 +12,7 @@ import queue
 sys.path.insert(5, 'D:\\projects\\uni_projects\\Pingpong_Online')
 print(sys.path)
 
-from game_proto import pingpong
+from game_proto import pingpong_client_server
 
 class Server:
     def __init__(self,share_queue, port_number=29999):
@@ -58,7 +58,7 @@ if __name__ == "__main__":
         server.run()
         
     def run_game():
-        game = pingpong.GameEngine(share_queue)
+        game = pingpong_client_server.GameEngine(share_queue)
         game.run()
         
     '''Multi-threading'''
