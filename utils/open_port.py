@@ -1,5 +1,9 @@
 import socket
 
+'''
+Make the device listens to a specific port.
+'''
+
 def start_server(port=8080):
     try:    
         local_ip = socket.gethostbyname(socket.gethostname())

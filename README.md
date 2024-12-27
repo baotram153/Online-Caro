@@ -1,14 +1,18 @@
 - Notes
     - Every machines have to listen to the same port
+    - If client press "/", a closing message is sent to server, client socket is closed
     - Imagine having 3 machines
         - Once a host turn on the game, it will listen to port 29999, and send request to other hosts on this port
-            - If a connection is formed
-                - It will recieved the name of the player -> put into player list
-            - If a connection is not formed
-                - That host is not a player
-    - Simple version
-        - 1 machine as server and the other as client
-
+        - If that host is listening to the same port, a connection will be formed in another port
+            - Listen port: discover players
+            - Connect port: play game together
+        - Shared queue is used to exchange message from peer program to game program
+        - If a connection is formed
+            - It will recieved the name of the player -> put into player list
+        - If a connection is not formed
+            - That host is not a player
+    - 1 machine testing
+        - Listen port and connect port has to be different
 - Initial server
     - 
 - Initial client
