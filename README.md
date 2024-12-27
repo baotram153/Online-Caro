@@ -6,6 +6,7 @@
         - If that host is listening to the same port, a connection will be formed in another port
             - Listen port: discover players
             - Connect port: play game together
+        - Shared queue is used to exchange message from peer program to game program
         - If a connection is formed
             - It will recieved the name of the player -> put into player list
         - If a connection is not formed

@@ -9,6 +9,7 @@ class GameEngine:
         pygame.init()
         
         self.share_queue = share_queue
+        self.player = "unknow"
 
         self.WIDTH, self.HEIGHT = 800, 600
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
@@ -39,6 +40,11 @@ class GameEngine:
         # font
         self.font = pygame.font.Font(None, 36)
         
+    def assign_player(self, player):
+        # player_1: "w" and "s"
+        # player_2: "up" and "down"
+        self.player = player
+        
     def draw_score(self):
         score_text = self.font.render(f"{self.score_left} - {self.score_right}", True, WHITE)
         self.screen.blit(score_text, (self.WIDTH // 2 - score_text.get_width() // 2, 20))
@@ -56,17 +62,31 @@ class GameEngine:
     # move paddle
     def move_paddle(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_w] and self.paddle_left.top > 0:
-            self.paddle_left.y -= self.paddle_speed
-        if keys[pygame.K_s] and self.paddle_left.bottom < self.HEIGHT:
-            self.paddle_left.y += self.paddle_speed
         
-        while not self.share_queue.empty():
-            op_key = self.share_queue.get()
-            if op_key=="UP" and self.paddle_right.top > 0:
+        if self.player == "player_1":
+            if keys[pygame.K_w] and self.paddle_left.top > 0:
+                self.paddle_left.y -= self.paddle_speed
+            if keys[pygame.K_s] and self.paddle_left.bottom < self.HEIGHT:
+                self.paddle_left.y += self.paddle_speed
+            
+            while not self.share_queue.empty():
+                op_key = self.share_queue.get()
+                if op_key=="up" and self.paddle_right.top > 0:
+                    self.paddle_right.y -= self.paddle_speed
+                if op_key=="down" and self.paddle_right.bottom < self.HEIGHT:
+                    self.paddle_right.y += self.paddle_speed  
+        elif self.player == "player_2":
+            if keys[pygame.K_UP] and self.paddle_right.top > 0:
                 self.paddle_right.y -= self.paddle_speed
-            if op_key=="DOWN" and self.paddle_right.bottom < self.HEIGHT:
-                self.paddle_right.y += self.paddle_speed  
+            if keys[pygame.K_DOWN] and self.paddle_right.bottom < self.HEIGHT:
+                self.paddle_right.y += self.paddle_speed
+            
+            while not self.share_queue.empty():
+                op_key = self.share_queue.get()
+                if op_key=="w" and self.paddle_left.top > 0:
+                    self.paddle_left.y -= self.paddle_speed
+                if op_key=="s" and self.paddle_left.bottom < self.HEIGHT:
+                    self.paddle_left.y += self.paddle_speed
 
     # Hàm xử lý bóng va chạm với tường hoặc paddle
     def move_ball(self):

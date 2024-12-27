@@ -1,6 +1,11 @@
 import socket
 from scapy.all import ARP, Ether, srp
 
+'''
+Broadcast ARP packets to all devices on the LAN to discover their IP and MAC addresses.
+But cannot know if the device is in the game or not.
+'''
+
 def discover_devices_on_lan():
     """Discover devices on the LAN using ARP."""
     devices = []
